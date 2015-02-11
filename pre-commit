@@ -9,14 +9,5 @@ if [[ `git diff --cached --check` ]]; then
 fi
 for FILE in $(git diff --cached --diff-filter=ACMTR --name-only HEAD | grep -E '\.xml|\.xsl');
 do
-            xmllint --noout $FILE > /dev/null
-            result=$?
-            echo "result "+$result
-            if [ $result -eq 0 ]; then
-                echo "XML's Properly formatted"
-            else
-                echo -e ${red}Commit failed: XML not formatted properly${color_end}
-                echo -e ${red} $FILE ${color_end}
-                xmllint --noout $FILE
-            fi
+            xmllint --noout $FILE
 done
